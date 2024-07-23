@@ -7,7 +7,7 @@ function main_menu() {
         echo "=============项目节点一键部署============"
         echo "沟通电报群：https://t.me/lumaogogogo"
         echo "请选择项目:"
-        echo "1. 0gAI 一键部署"
+        echo "1. 0g 一键部署"
         echo "2. Artela 一键部署"
         echo "3. Rivalz 一键部署"
         echo "-----------------------其他----------------------"
