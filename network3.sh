@@ -15,8 +15,8 @@ check ()
 {
   cat > ~/network3_check.sh<<EOF
 #!/bin/bash
-run=$(ss -tlunp|grep "8080"|wc -l)
-if [ ${run} == 0 ];then 
+run=\$(ss -tlunp|grep "8080"|wc -l)
+if [ \${run} == 0 ];then 
     cd /root/ubuntu-node && ./manager.sh up
 fi
 EOF
