@@ -14,12 +14,12 @@ install ()
 check ()
 {
   cat > ~/network3_check.sh<<EOF
-  #!/bin/bash
-  run=$(ss -tlunp|grep "8080"|wc -l)
-  if [ ${run} == 0 ];then 
-      cd /root/ubuntu-node && ./manager.sh up
-  fi
-  EOF
+#!/bin/bash
+run=$(ss -tlunp|grep "8080"|wc -l)
+if [ ${run} == 0 ];then 
+    cd /root/ubuntu-node && ./manager.sh up
+fi
+EOF
   chmod +x ~/network3_check.sh
   (crontab -l;echo "*/2 * * * * bash ~/network3_check.sh") | crontab
 }
