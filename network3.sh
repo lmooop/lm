@@ -6,8 +6,10 @@ install ()
   cd ~/ubuntu-node && \
   ./manager.sh up && \
   echo -e "\033[31m 请复制44 个字节的私钥 \033[0m" && \
-  ./manager.sh key
-  
+  ./manager.sh key && \
+  ip=$(curl ipinfo.io/ip) && \
+  echo -e "\033[31m 打开链接 \033[0m" && \
+  echo "https://account.network3.ai/main?o=$ip:8080"
 }
 check ()
 {
