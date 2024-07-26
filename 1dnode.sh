@@ -19,7 +19,7 @@ function main_menu() {
         1) wget -O 0g.sh https://raw.githubusercontent.com/lmooop/lm/main/0g.sh && chmod +x 0g.sh && ./0g.sh ;;
         2) wget -O Artela.sh https://raw.githubusercontent.com/lmooop/lm/main/Artela.sh && chmod +x Artela.sh && ./Artela.sh ;;
         3) wget -O rivalz.sh https://raw.githubusercontent.com/lmooop/lm/main/rivalz.sh && chmod +x rivalz.sh && ./rivalz.sh ;;
-        4) wget -O rivalz.sh https://raw.githubusercontent.com/lmooop/lm/main/network3.sh && chmod +x network3.sh && ./network3.sh ;;
+        4) wget -O network3.sh https://raw.githubusercontent.com/lmooop/lm/main/network3.sh && chmod +x network3.sh && ./network3.sh ;;
         
         0) echo "退出脚本。"; exit 0 ;;
         *) echo "无效选项，请重新输入。"; sleep 3 ;;
