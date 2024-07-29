@@ -27,7 +27,6 @@ function install_node() {
     fi
 
     #rm -rf ./nwaku-compose
-    git clone https://github.com/waku-org/nwaku-compose
     if [ -d "nwaku-compose" ]; then
         read -r -p "是否卸载重装，Y 卸载重装(重装前请手动备份)[Y/n] " input
         case $input in
@@ -47,11 +46,12 @@ function install_node() {
         		;;
         esac
     fi
-
+    git clone https://github.com/waku-org/nwaku-compose
     cp .env.example .env
     read -r -p "输入infura地址,e.g. https://sepolia.infura.io/v3/123aa110320f4aec179150fba1e1b1b1" RLN_RELAY_ETH_CLIENT_ADDRESS
     read -r -p "输入钱包私钥,不带0x,e.g. 0116196e9a8abed42dd1a22eb63fa2a5a17b0c27d716b87ded2c54f1bf192a0b" ETH_TESTNET_KEY
     read -r -p "自定义密码,e.g. 123400800Ib" RLN_RELAY_CRED_PASSWORD
+
     sed -i "s#RLN_RELAY_ETH_CLIENT_ADDRESS=.*#RLN_RELAY_ETH_CLIENT_ADDRESS=${RLN_RELAY_ETH_CLIENT_ADDRESS}#g" ~/nwaku-compose/.env
     sed -i "s#ETH_TESTNET_KEY=.*#ETH_TESTNET_KEY=${ETH_TESTNET_KEY}#g" ~/nwaku-compose/.env
     sed -i "s#RLN_RELAY_CRED_PASSWORD=.*#RLN_RELAY_CRED_PASSWORD=\"${RLN_RELAY_CRED_PASSWORD}\"#g" ~/nwaku-compose/.env
