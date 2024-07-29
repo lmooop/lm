@@ -48,14 +48,14 @@ function install_node() {
     fi
     git clone https://github.com/waku-org/nwaku-compose && cd ./nwaku-compose
     cp .env.example .env
-    read -r -p "输入infura地址,e.g. https://sepolia.infura.io/v3/123aa110320f4aec179150fba1e1b1b1: " RLN_RELAY_ETH_CLIENT_ADDRESS
-    read -r -p "输入钱包私钥,不带0x,e.g. 0116196e9a8abed42dd1a22eb63fa2a5a17b0c27d716b87ded2c54f1bf192a0b: " ETH_TESTNET_KEY
-    read -r -p "自定义密码,e.g. 123400800Ib: " RLN_RELAY_CRED_PASSWORD
+    read -p "输入infura地址,e.g. https://sepolia.infura.io/v3/123aa110320f4aec179150fba1e1b1b1:\n" RLN_RELAY_ETH_CLIENT_ADDRESS
+    read -p "输入钱包私钥,不带0x,e.g. 0116196e9a8abed42dd1a22eb63fa2a5a17b0c27d716b87ded2c54f1bf192a0b:\n" ETH_TESTNET_KEY
+    read -p "自定义密码,e.g. 123400800Ib:\n" RLN_RELAY_CRED_PASSWORD
 
     sed -i "s#RLN_RELAY_ETH_CLIENT_ADDRESS=.*#RLN_RELAY_ETH_CLIENT_ADDRESS=${RLN_RELAY_ETH_CLIENT_ADDRESS}#g" ~/nwaku-compose/.env
     sed -i "s#ETH_TESTNET_KEY=.*#ETH_TESTNET_KEY=${ETH_TESTNET_KEY}#g" ~/nwaku-compose/.env
     sed -i "s#RLN_RELAY_CRED_PASSWORD=.*#RLN_RELAY_CRED_PASSWORD=\"${RLN_RELAY_CRED_PASSWORD}\"#g" ~/nwaku-compose/.env
-
+    ./register_rln.sh
     docker-compose up -d
 }
 
