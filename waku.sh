@@ -57,6 +57,8 @@ function install_node() {
     sed -i "s#RLN_RELAY_CRED_PASSWORD=.*#RLN_RELAY_CRED_PASSWORD=\"${RLN_RELAY_CRED_PASSWORD}\"#g" ~/nwaku-compose/.env
     ./register_rln.sh
     docker-compose up -d
+    ip=$(curl ipinfo.io/ip)
+    echo -e "\033[31m http://$ip:3000/d/yns_4vFVk/nwaku-monitoring \033[0m"
 }
 
 
