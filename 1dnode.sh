@@ -7,6 +7,14 @@ node_project=(
   waku
 )
 
+network3(){
+  wget -O ~/0g.sh https://raw.githubusercontent.com/lmooop/lm/main/network3.sh && chmod +x ~/network3.sh && ~/network3.sh
+}
+
+waku(){
+   wget -O ~/waku.sh https://raw.githubusercontent.com/lmooop/lm/main/waku.sh && chmod +x ~/waku.sh && ~/waku.sh
+}
+
 function main_menu() {
   logo
   select p in ${node_project[@]}
@@ -24,14 +32,5 @@ echo -e '\033[33m    /    / _ \/ _  / -_) /|_/ / _ `(_-</ __/ -_) __/ \033[0m'
 echo -e '\033[33m   /_/|_/\___/\_,_/\__/_/  /_/\_,_/___/\__/\__/_/    \033[0m'
 echo -e '\033[33m                                                     \033[0m'
 }
-
-network3(){
-  wget -O ~/0g.sh https://raw.githubusercontent.com/lmooop/lm/main/network3.sh && chmod +x ~/network3.sh && ~/network3.sh
-}
-
-waku(){
-   wget -O ~/waku.sh https://raw.githubusercontent.com/lmooop/lm/main/waku.sh && chmod +x ~/waku.sh && ~/waku.sh
-}
-
 
 main_menu
