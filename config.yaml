@@ -3,7 +3,7 @@ node:
     remark: 2c2g即可
     url: https://raw.githubusercontent.com/lmooop/lm/main/network3.sh
 
-  - name: networks
+  - name: waku
     remark: 2c2g即可
     url: https://raw.githubusercontent.com/lmooop/lm/main/waku.sh
 
