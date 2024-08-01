@@ -7,6 +7,11 @@ node_project=(
   waku
 )
 
+miner_project=(
+  network3 
+  waku
+)
+
 network3(){
   wget -O ~/0g.sh https://raw.githubusercontent.com/lmooop/lm/main/network3.sh && chmod +x ~/network3.sh && ~/network3.sh
 }
@@ -15,9 +20,31 @@ waku(){
    wget -O ~/waku.sh https://raw.githubusercontent.com/lmooop/lm/main/waku.sh && chmod +x ~/waku.sh && ~/waku.sh
 }
 
+
+function miner() {
+  echo ""
+  PS3="请输入挖矿项目编号: "
+  # logo
+  select p in ${miner_project[@]}
+  do
+    $p
+    break;
+  done
+}
+function node() {
+  # logo
+  echo ""
+  PS3="请输入节点项目编号: "
+  select p in ${node_project[@]}
+  do
+    $p
+    break;
+  done
+}
+
 function main_menu() {
   logo
-  select p in ${node_project[@]}
+  select p in node miner
   do
     $p
     break;

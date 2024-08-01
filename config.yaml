@@ -1,0 +1,17 @@
+node:
+  - name: networks
+    remark: 2c2g即可
+    url: https://raw.githubusercontent.com/lmooop/lm/main/network3.sh
+
+  - name: networks
+    remark: 2c2g即可
+    url: https://raw.githubusercontent.com/lmooop/lm/main/waku.sh
+
+miner:
+  - name: t1-project
+    remark: 2c2g即可
+    url: ""
+
+  - name: t2-project2
+    remark: 2c2g即可
+    url: ""
