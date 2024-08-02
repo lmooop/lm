@@ -1,6 +1,7 @@
 #!/bin/bash
 
 安装titan() {
+    echo "开始安装...."
     if ! command -v docker &> /dev/null; then
         echo "安装 Docker ..."
         sudo apt install -y docker.io 
