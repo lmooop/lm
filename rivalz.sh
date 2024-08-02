@@ -1,5 +1,5 @@
 #!/bin/bash
-安装 ()
+安装rivalz()
 {
   if command -v node > /dev/null 2>&1; then
       echo "Node.js 已安装"
@@ -18,10 +18,17 @@
       sudo apt-get install -y npmGit Graph
   fi
 
-  node -v && npm i -g rivalz-node-cli@latest && rivalz run && \
-    pm2 start "rivalz run" --name rivalz && \
+  node -v && npm i -g rivalz-node-cli@latest && rivalz run
+  pm2 start "rivalz run" --name rivalz && \
     pm2 startup && pm2 save && pm2 list
   echo "rivalz安装成功..."
+}
+
+卸载rivalz(){
+  pm2 del rivalz
+  pm2 save
+  rm -rf ~/.rivalz
+  echo "卸载完成"
 }
 
 添加定时任务检测版本更新(){
@@ -37,7 +44,8 @@ EOF
   crontab -l
 }
 options=(
-安装
+安装rivalz
+卸载rivalz
 添加定时任务检测版本更新
 )
 
