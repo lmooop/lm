@@ -24,7 +24,7 @@
   echo "rivalz安装成功..."
 }
 
-添加定时更新版本任务(){
+添加定时任务检测版本更新(){
 cat > ~/rivalz_update.sh << EOF
 #!/bin/bash
 /usr/bin/rivalz update-version && pm2 restart rivalz
@@ -38,7 +38,7 @@ EOF
 }
 options=(
 安装
-添加定时更新版本任务
+添加定时任务检测版本更新
 )
 
 logo()
