@@ -16,7 +16,7 @@
     read -p $'分配存储大小,单位G: \n' storage
 
 
-    docker run -d --restart always -v "~/.titanedge:/root/.titanedge" \
+    docker run -d --restart always -v "/root/.titanedge:/root/.titanedge" \
       --net=host \
       --name "titan" \
       nezha123/titan-edge:1.6_amd64
