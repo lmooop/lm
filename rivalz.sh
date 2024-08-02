@@ -61,15 +61,12 @@ echo -e '\033[33m                                                     \033[0m'
 menu() {
   clear
   PS3="请输入编号: "
-  while true
+  logo
+  select p in ${options[@]}
     do
-      logo
-      select p in ${options[@]}
-        do
-          $p
-          echo "-===================NodeMaster============================-"
-          break;
-        done
+      $p
+      echo "-===================NodeMaster============================-"
+      break;
     done
 }
 menu
