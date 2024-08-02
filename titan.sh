@@ -11,19 +11,19 @@
         systemctl enable docker
     fi
     docker pull nezha123/titan-edge:1.6_amd64
-    mkdir -pv ~/.titanedge/storage
+    mkdir -pv ~/.titanedge
     read -p $'输入节点 id: \n' id
     read -p $'分配存储大小,单位G: \n' storage
 
 
-    docker run -d --restart always -v "~/.titanedge/storage:/root/.titanedge/storage" \
+    docker run -d --restart always -v "~/.titanedge:/root/.titanedge" \
       --net=host \
       --name "titan" \
       nezha123/titan-edge:1.6_amd64
     sleep_time
     # docker exec $container_id bash -c "\
-    sed -i 's#^[[:space:]]*#StorageGB = .*#StorageGB = $storage_gb#' ~/.titanedge/storage/config.toml
-    sed -i 's#^[[:space:]]*#ListenAddress = \"0.0.0.0:1234\"#ListenAddress = \"0.0.0.0:10086\"#' ~/.titanedge/storage/config.toml
+    sed -i 's#StorageGB = .*#StorageGB = '$storage'#' ~/.titanedge/config.toml
+    sed -i 's#istenAddress = .*#ListenAddress = \"0.0.0.0:10086\"#' ~/.titanedge/config.toml
     docker restart titan && \
       docker ps -a |grep "titan"
     docker exec titan bash -c "\
