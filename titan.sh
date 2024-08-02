@@ -1,6 +1,6 @@
 #!/bin/bash
 
-安装() {
+安装titan() {
     if ! command -v docker &> /dev/null; then
         echo "安装 Docker ..."
         sudo apt install -y docker.io 
@@ -31,8 +31,14 @@
     echo "titan 安装成功...."
 }
 
+卸载titan(){
+  docker stop titan
+  docker rm -f titan
+  rm -rf ~/.titanedge
+}
 options=(
-安装
+安装titan
+卸载titan
 )
 
 sleep_time() {
