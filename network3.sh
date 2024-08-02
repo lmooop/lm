@@ -28,6 +28,7 @@ EOF
     chmod +x ~/network3_check.sh
     (crontab -l;echo "*/2 * * * * bash ~/network3_check.sh") | crontab
   fi
+  crontab -l
 }
 
 卸载节点(){
@@ -57,6 +58,7 @@ menu() {
   select p in ${options[@]}
   do
     $p
+    break;
   done
 }
 menu

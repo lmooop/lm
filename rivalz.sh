@@ -29,12 +29,12 @@ cat > ~/rivalz_update.sh << EOF
 #!/bin/bash
 /usr/bin/rivalz update-version && pm2 restart rivalz
 EOF
-
   exist=$(crontab -l|grep -E "rivalz_update")        
-  if [ ! "$run" ] ; then 
+  if [ ! "$exist" ] ; then 
     chmod +x ~/rivalz_update.sh
     (crontab -l;echo "0 */4 * * * bash ~/rivalz_update.sh") | crontab
   fi
+  crontab -l
 }
 options=(
 安装
@@ -49,13 +49,19 @@ echo -e '\033[33m    /    / _ \/ _  / -_) /|_/ / _ `(_-</ __/ -_) __/ \033[0m'
 echo -e '\033[33m   /_/|_/\___/\_,_/\__/_/  /_/\_,_/___/\__/\__/_/    \033[0m'
 echo -e '\033[33m                                                     \033[0m'
 }
-menu() {
-  logo
-  PS3="请输入编号: "
-  select p in ${options[@]}
-  do
-    $p
-  done
-}
 
+menu() {
+  clear
+  PS3="请输入编号: "
+  while true
+    do
+      logo
+      select p in ${options[@]}
+        do
+          $p
+          echo "-===================NodeMaster============================-"
+          break;
+        done
+    done
+}
 menu

@@ -54,13 +54,18 @@ echo -e '\033[33m   /_/|_/\___/\_,_/\__/_/  /_/\_,_/___/\__/\__/_/    \033[0m'
 echo -e '\033[33m                                                     \033[0m'
 }
 menu() {
-  sleep_time
-  logo
+  clear
   PS3="请输入编号: "
   # logo
-  select p in ${options[@]}
-  do
-    $p
-  done
+  while true
+    do
+      logo
+      select p in ${options[@]}
+        do
+          $p
+          echo "-===================NodeMaster============================-"
+          break;
+        done
+    done
 }
 menu

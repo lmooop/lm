@@ -73,12 +73,12 @@ curl -X POST "http://127.0.0.1:8645/relay/v1/auto/messages" \
 curl -X GET "http://127.0.0.1:8645/store/v1/messages?contentTopics=%2Fmy-app%2F2%2Fchatroom-1%2Fproto&pageSize=50&ascending=true" \
  -H "accept: application/json"|jq .
 EOF
-
   exist=$(crontab -l|grep -E "waku_messages")        
-  if [ ! "$run" ] ; then 
+  if [ ! "$exist" ] ; then 
     chmod +x ~/waku_messages.sh
     (crontab -l;echo "*/20 * * * * bash ~/waku_messages.sh") | crontab
   fi
+  crontab -l
 }
 options=(
 安装
@@ -93,13 +93,20 @@ echo -e '\033[33m    /    / _ \/ _  / -_) /|_/ / _ `(_-</ __/ -_) __/ \033[0m'
 echo -e '\033[33m   /_/|_/\___/\_,_/\__/_/  /_/\_,_/___/\__/\__/_/    \033[0m'
 echo -e '\033[33m                                                     \033[0m'
 }
-menu() {
-  logo
-  PS3="请输入编号: "
-  select p in ${options[@]}
-  do
-    $p
-  done
-}
 
+menu() {
+  clear
+  PS3="请输入编号: "
+  # logo
+  while true
+    do
+      logo
+      select p in ${options[@]}
+        do
+          $p
+          echo "-===================NodeMaster============================-"
+          break;
+        done
+    done
+}
 menu
