@@ -22,8 +22,8 @@
       nezha123/titan-edge:1.6_amd64
     sleep_time
     # docker exec $container_id bash -c "\
-    sed -i 's#StorageGB = .*#StorageGB = '$storage'#' ~/.titanedge/config.toml
-    sed -i 's#istenAddress = .*#ListenAddress = \"0.0.0.0:10086\"#' ~/.titanedge/config.toml
+    sed -i 's#\#StorageGB = .*#StorageGB = '$storage'#' ~/.titanedge/config.toml
+    sed -i 's#\#ListenAddress = .*#ListenAddress = \"0.0.0.0:10086\"#' ~/.titanedge/config.toml
     docker restart titan && \
       docker ps -a |grep "titan"
     docker exec titan bash -c "\
