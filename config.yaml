@@ -1,5 +1,5 @@
 node:
-  - name: networks
+  - name: networks3
     remark: 配置要求低
     url: https://raw.githubusercontent.com/lmooop/lm/main/network3.sh
 
