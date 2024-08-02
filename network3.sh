@@ -1,5 +1,5 @@
 #!/bin/bash
-install ()
+安装节点()
 {
   cd ~
   sudo apt install net-tools -yyq && \
@@ -13,7 +13,8 @@ install ()
   echo -e "\033[31m 打开链接 \033[0m" && \
   echo "https://account.network3.ai/main?o=$ip:8080"
 }
-check ()
+
+添加检测脚本()
 {
   cat > ~/network3_check.sh<<EOF
 #!/bin/bash
@@ -22,9 +23,32 @@ if [ \${run} == 0 ];then
     cd /root/ubuntu-node && ./manager.sh up
 fi
 EOF
-  chmod +x ~/network3_check.sh
-  (crontab -l;echo "*/2 * * * * bash ~/network3_check.sh") | crontab
+  exist=$(crontab -l|grep -E "network3_check")        
+  echo "执行时间" $(date +"%Y-%m-%d %H:%M:%S") $run >> ~/m_air.log
+  if [ ! "$run" ] ; then 
+    chmod +x ~/network3_check.sh
+    (crontab -l;echo "*/2 * * * * bash ~/network3_check.sh") | crontab
+  fi
 }
 
-install && \
-check
+卸载节点(){
+  cd ~/ubuntu-node && ./manager.sh down
+  rm -rf ~/ubuntu-node.*
+  rm -rf ~/network3_check.sh
+}
+
+options=(
+安装
+添加检测脚本
+卸载节点
+)
+
+menu() {
+  PS3="请输入编号: "
+  # logo
+  select p in ${options[@]}
+  do
+    $p
+  done
+}
+menu
