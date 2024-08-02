@@ -4,6 +4,7 @@
     exist=$(pm2 list|grep -E "rivalz")
     if [ "$exist" ] ; then 
       echo "rivalz已经在运行，退出安装....."
+      return 0
     fi
 
   if command -v node > /dev/null 2>&1; then

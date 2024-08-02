@@ -1,6 +1,13 @@
 #!/bin/bash
 安装()
 {
+
+  exist=$(ss -tlunp|grep -E "8080")        
+  if [ "$exist" ] ; then 
+    echo "network3已在运行,退出安装..."
+    return 0
+  fi
+
   cd ~
   sudo apt install net-tools -yyq && \
   wget -O ubuntu-node-v2.1.0.tar https://network3.io/ubuntu-node-v2.1.0.tar && \

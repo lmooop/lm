@@ -6,6 +6,7 @@
     exist=$(docker ps -a|grep -E "titan")        
     if [ "$exist" ] ; then 
       echo "titan已经在运行，退出安装....."
+      return 0
     fi
 
     if ! command -v docker &> /dev/null; then
