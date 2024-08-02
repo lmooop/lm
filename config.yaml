@@ -1,11 +1,19 @@
 node:
   - name: networks
-    remark: 2c2g即可
+    remark: 配置要求低
     url: https://raw.githubusercontent.com/lmooop/lm/main/network3.sh
 
   - name: waku
-    remark: 2c4g即可
+    remark: 配置要求低
     url: https://raw.githubusercontent.com/lmooop/lm/main/waku.sh
+
+  - name: titan
+    remark: 磁盘分配多分多
+    url: https://raw.githubusercontent.com/lmooop/lm/main/titan.sh
+
+  - name: rivalz
+    remark: 磁盘分配多分多
+    url: https://raw.githubusercontent.com/lmooop/lm/main/rivalz.sh
 
 miner:
   - name: demo1
