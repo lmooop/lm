@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 安装节点函数
-function install_node() {
+安装() {
     sudo apt update && sudo apt upgrade -y
     sudo apt install -y curl iptables build-essential git wget jq make gcc nano tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev
 
@@ -61,5 +61,36 @@ function install_node() {
     echo -e "\033[31m http://$ip:3000/d/yns_4vFVk/nwaku-monitoring \033[0m"
 }
 
+添加发送消息脚本(){
+cat > ~/waku_messages.sh << EOF
+#!/bin/bash
+time=\$(date "+%Y-%m-%d %H:%M:%S")
 
-install_node
+curl -X POST "http://127.0.0.1:8645/relay/v1/auto/messages" \
+ -H "content-type: application/json" \
+ -d '{"payload":"'\$(echo -n "hello world UTC:\$time" | base64)'","contentTopic":"/my-app/2/chatroom-1/proto"}'
+
+curl -X GET "http://127.0.0.1:8645/store/v1/messages?contentTopics=%2Fmy-app%2F2%2Fchatroom-1%2Fproto&pageSize=50&ascending=true" \
+ -H "accept: application/json"|jq .
+EOF
+
+  exist=$(crontab -l|grep -E "waku_messages")        
+  if [ ! "$run" ] ; then 
+    chmod +x ~/waku_messages.sh
+    (crontab -l;echo "*/20 * * * * bash ~/waku_messages.sh") | crontab
+  fi
+}
+options=(
+安装
+添加发送消息脚本
+)
+
+menu() {
+  PS3="请输入编号: "
+  select p in ${options[@]}
+  do
+    $p
+  done
+}
+
+menu

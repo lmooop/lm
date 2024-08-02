@@ -1,5 +1,5 @@
 #!/bin/bash
-安装节点()
+安装()
 {
   cd ~
   sudo apt install net-tools -yyq && \
@@ -24,7 +24,6 @@ if [ \${run} == 0 ];then
 fi
 EOF
   exist=$(crontab -l|grep -E "network3_check")        
-  echo "执行时间" $(date +"%Y-%m-%d %H:%M:%S") $run >> ~/m_air.log
   if [ ! "$run" ] ; then 
     chmod +x ~/network3_check.sh
     (crontab -l;echo "*/2 * * * * bash ~/network3_check.sh") | crontab

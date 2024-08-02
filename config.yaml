@@ -8,39 +8,6 @@ node:
     url: https://raw.githubusercontent.com/lmooop/lm/main/waku.sh
 
 miner:
-  - name: t1-project
+  - name: demo1
     remark: 我是备注5
-    url: ""
-  - name: t2-project2
-    remark: 我是备注3
-    url: ""
-  - name: t2-project3
-    remark: 我是备注2
-    url: ""
-  - name: t2-project4
-    remark: 我是备注1
-    url: ""
-  - name: t2-project5
-    remark: 我是备注
-    url: ""
-  - name: t2-project5
-    remark: 092n
-    url: ""
-  - name: t1-projdsa1
-    remark: dsadsa
-    url: ""
-  - name: t2-proct3
-    remark: ttass
-    url: ""
-  - name: t2-proct3
-    remark: 我是备注
-    url: ""
-  - name: t2-proect4
-    remark: 090001
-    url: ""
-  - name: t2-proect90
-    remark: dsad
-    url: ""
-  - name: t2-project231
-    remark: 我fas
     url: ""
