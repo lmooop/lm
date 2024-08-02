@@ -2,6 +2,12 @@
 
 安装titan() {
     echo "开始安装...."
+
+    exist=$(docker ps -a|grep -E "titan")        
+    if [ "$exist" ] ; then 
+      echo "titan已经在运行，退出安装....."
+    fi
+
     if ! command -v docker &> /dev/null; then
         echo "安装 Docker ..."
         sudo apt install -y docker.io 

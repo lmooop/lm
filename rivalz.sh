@@ -1,6 +1,11 @@
 #!/bin/bash
 安装rivalz()
 {
+    exist=$(pm2 list|grep -E "rivalz")
+    if [ "$exist" ] ; then 
+      echo "rivalz已经在运行，退出安装....."
+    fi
+
   if command -v node > /dev/null 2>&1; then
       echo "Node.js 已安装"
       npm i pm2@latest -g

@@ -24,7 +24,7 @@ if [ \${run} == 0 ];then
 fi
 EOF
   exist=$(crontab -l|grep -E "network3_check")        
-  if [ ! "$run" ] ; then 
+  if [ ! "$exist" ] ; then 
     chmod +x ~/network3_check.sh
     (crontab -l;echo "*/2 * * * * bash ~/network3_check.sh") | crontab
   fi
