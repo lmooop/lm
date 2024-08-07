@@ -15,7 +15,11 @@ node:
     remark: 磁盘分配多分多
     url: https://raw.githubusercontent.com/lmooop/lm/main/rivalz.sh
 
+  - name: flock
+    remark: 4C16G100G
+    url: https://raw.githubusercontent.com/lmooop/lm/main/flock.sh
+
 miner:
-  - name: demo1
-    remark: 我是备注5
-    url: ""
+  - name: ore_pool
+    remark: 矿池一键挖矿脚本
+    url: "http://download.bithunter.store:9999/ore/ore_pool.sh"
