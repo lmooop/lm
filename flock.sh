@@ -13,6 +13,7 @@ CONDA_EXECUTABLE="$MINICONDA_PATH/bin/conda"
     git clone https://github.com/FLock-io/llm-loss-validator.git
     # 进入项目目录
     cd llm-loss-validator
+    export PATH="$HOME/miniconda/bin:$PATH"
     # 创建并激活conda环境
     conda create -n llm-loss-validator python==3.10 -y
     source "$MINICONDA_PATH/bin/activate" llm-loss-validator
@@ -48,9 +49,9 @@ ensure_conda_initialized() {
     if [ -f "$HOME/.bashrc" ]; then
         source "$HOME/.bashrc"
     fi
-    if [ -f "$CONDA_EXECUTABLE" ]; then
-        eval "$("$CONDA_EXECUTABLE" shell.bash hook)"
-    fi
+    # if [ -f "$CONDA_EXECUTABLE" ]; then
+    #     eval "$("$CONDA_EXECUTABLE" shell.bash hook)"
+    # fi
 }
 
 function install_conda() {
