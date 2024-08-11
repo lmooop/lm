@@ -88,7 +88,7 @@ ipfs_i(){
   read -p $'请输入已领水的EVM私钥: \n' wallet
   mkdir -pv /app/lilypad
 cat > /app/lilypad/resource-provider-gpu.env << EOF
-WEB3_PRIVATE_KEY=\${wallet}
+WEB3_PRIVATE_KEY=$wallet
 EOF
   sudo systemctl daemon-reload
   sudo systemctl enable bacalhau
