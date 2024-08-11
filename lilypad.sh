@@ -1,3 +1,4 @@
+#!/bin/bash
 lilypad(){
   # 检查机器的架构并设置变量: $OSARCH
   OSARCH=$(uname -m | awk '{if ($0 ~ /arm64|aarch64/) print "arm64"; else if ($0 ~ /x86_64|amd64/) print "amd64"; else print "unsupported_arch"}') && export OSARCH;
