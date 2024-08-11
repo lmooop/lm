@@ -1,4 +1,4 @@
-lilypad{
+lilypad(){
   # 检查机器的架构并设置变量: $OSARCH
   OSARCH=$(uname -m | awk '{if ($0 ~ /arm64|aarch64/) print "arm64"; else if ($0 ~ /x86_64|amd64/) print "amd64"; else print "unsupported_arch"}') && export OSARCH;
   # 检测您的操作系统并将其设置为: $OSNAME
@@ -31,7 +31,7 @@ EOF
   lilypad
 }
 
-gpu{
+gpu(){
   curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
     && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
       sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
@@ -44,7 +44,7 @@ gpu{
   sudo systemctl restart docker
 }
 
-bacalhau{
+bacalhau(){
   cd /tmp
   wget https://github.com/bacalhau-project/bacalhau/releases/download/v1.3.2/bacalhau_v1.3.2_linux_amd64.tar.gz||exit 1
   tar xfv bacalhau_v1.3.2_linux_amd64.tar.gz
@@ -71,7 +71,7 @@ WantedBy=multi-user.target
 EOF
 }
 
-ipfs{
+ipfs(){
   cd /tmp
   wget https://github.com/ipfs/kubo/releases/download/v0.29.0/kubo_v0.29.0_linux-amd64.tar.gz||exit 1
   tar -zxvf kubo_v0.29.0_linux-amd64.tar.gz || exit 1
@@ -81,7 +81,7 @@ ipfs{
   ipfs init
 }
 
-安装节点{
+安装节点(){
   gpu && lilypad && bacalhau && ipfs && \
     read -p $'请输入已领水的EVM私钥: \n' wallet
   mkdir -pv /app/lilypad
