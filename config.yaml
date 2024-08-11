@@ -1,4 +1,8 @@
 node:
+  - name: lilypad
+    remark: 需要GPU
+    url: https://raw.githubusercontent.com/lmooop/lm/main/lilypad.sh
+
   - name: networks3
     remark: 配置要求低
     url: https://raw.githubusercontent.com/lmooop/lm/main/network3.sh
