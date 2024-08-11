@@ -11,7 +11,7 @@ lilypad(){
   chmod +x lilypad
   # 移动到bin目录
   sudo mv lilypad /usr/local/bin/lilypad
-cat << EOF > /etc/systemd/system/lilypad-resource-provider.service
+cat > /etc/systemd/system/lilypad-resource-provider.service << EOF
 [Unit]
 Description=Lilypad V2 Resource Provider GPU
 After=network-online.target
@@ -75,7 +75,7 @@ EOF
 ipfs(){
   cd /tmp
   wget https://github.com/ipfs/kubo/releases/download/v0.29.0/kubo_v0.29.0_linux-amd64.tar.gz -O kubo_v0.29.0_linux-amd64.tar.gz
-  tar -zxvf kubo_v0.29.0_linux-amd64.tar.gz
+  tar -xf kubo_v0.29.0_linux-amd64.tar.gz
   cd kubo/ 
   chmod +x ./ipfs
   ./install.sh
@@ -84,18 +84,18 @@ ipfs(){
 }
 
 安装节点(){
-  gpu && lilypad && bacalhau && ipfs && \
-    read -p $'请输入已领水的EVM私钥: \n' wallet
+  gpu && lilypad && bacalhau && ipfs
+  read -p $'请输入已领水的EVM私钥: \n' wallet
   mkdir -pv /app/lilypad
-cat << EOF > /app/lilypad/resource-provider-gpu.env
+cat > /app/lilypad/resource-provider-gpu.env << EOF
 WEB3_PRIVATE_KEY=\${wallet}
 EOF
-sudo systemctl daemon-reload
-sudo systemctl enable bacalhau
-sudo systemctl enable lilypad-resource-provider
-sudo systemctl start bacalhau
-sudo systemctl start lilypad-resource-provider
-sudo systemctl status lilypad-resource-provider
+  sudo systemctl daemon-reload
+  sudo systemctl enable bacalhau
+  sudo systemctl enable lilypad-resource-provider
+  sudo systemctl start bacalhau
+  sudo systemctl start lilypad-resource-provider
+  sudo systemctl status lilypad-resource-provider
 }
 options=(
 安装节点
