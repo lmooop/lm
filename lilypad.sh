@@ -1,11 +1,12 @@
 #!/bin/bash
 lilypad(){
   # 检查机器的架构并设置变量: $OSARCH
-  OSARCH=$(uname -m | awk '{if ($0 ~ /arm64|aarch64/) print "arm64"; else if ($0 ~ /x86_64|amd64/) print "amd64"; else print "unsupported_arch"}') && export OSARCH;
+  #OSARCH=$(uname -m | awk '{if ($0 ~ /arm64|aarch64/) print "arm64"; else if ($0 ~ /x86_64|amd64/) print "amd64"; else print "unsupported_arch"}') && export OSARCH;
   # 检测您的操作系统并将其设置为: $OSNAME
-  OSNAME=$(uname -s | awk '{if ($1 == "Darwin") print "darwin"; else if ($1 == "Linux") print "linux"; else print "unsupported_os"}') && export OSNAME;
+  #OSNAME=$(uname -s | awk '{if ($1 == "Darwin") print "darwin"; else if ($1 == "Linux") print "linux"; else print "unsupported_os"}') && export OSNAME;
   # 下载最新发布版本的二进制
-  curl https://api.github.com/repos/lilypad-tech/lilypad/releases/latest | grep "browser_download_url.*lilypad-$OSNAME-$OSARCH" | cut -d : -f 2,3 | tr -d \" | wget -qi - -O lilypad
+  # curl https://api.github.com/repos/lilypad-tech/lilypad/releases/latest | grep "browser_download_url.*lilypad-$OSNAME-$OSARCH" | cut -d : -f 2,3 | tr -d \" | wget -qi - -O lilypad
+  wget -O lilypad https://github.com/Lilypad-Tech/lilypad/releases/download/v2.2.7/lilypad-linux-amd64-cpu
   # 更改权限
   chmod +x lilypad
   # 移动到bin目录
@@ -29,7 +30,6 @@ ExecStart=/usr/local/bin/lilypad resource-provider
 [Install]
 WantedBy=multi-user.target
 EOF
-  lilypad
 }
 
 gpu(){
@@ -47,7 +47,7 @@ gpu(){
 
 bacalhau(){
   cd /tmp
-  wget https://github.com/bacalhau-project/bacalhau/releases/download/v1.3.2/bacalhau_v1.3.2_linux_amd64.tar.gz||exit 1
+  wget https://github.com/bacalhau-project/bacalhau/releases/download/v1.3.2/bacalhau_v1.3.2_linux_amd64.tar.gz -O bacalhau_v1.3.2_linux_amd64.tar.gz
   tar xfv bacalhau_v1.3.2_linux_amd64.tar.gz
   sudo mv bacalhau /usr/bin/bacalhau
   sudo mkdir -p /app/data/ipfs
@@ -74,9 +74,10 @@ EOF
 
 ipfs(){
   cd /tmp
-  wget https://github.com/ipfs/kubo/releases/download/v0.29.0/kubo_v0.29.0_linux-amd64.tar.gz||exit 1
-  tar -zxvf kubo_v0.29.0_linux-amd64.tar.gz || exit 1
+  wget https://github.com/ipfs/kubo/releases/download/v0.29.0/kubo_v0.29.0_linux-amd64.tar.gz -O kubo_v0.29.0_linux-amd64.tar.gz
+  tar -zxvf kubo_v0.29.0_linux-amd64.tar.gz
   cd kubo/ 
+  chmod +x ./ipfs
   ./install.sh
   export IPFS_PATH=/app/data/ipfs
   ipfs init
