@@ -4,6 +4,7 @@
     exist=$(pm2 list|grep -E "rivalz")
     if [ "$exist" ] ; then 
       echo "rivalz已经在运行，退出安装....."
+      rivalz update-version
       return 0
     fi
 
@@ -24,8 +25,8 @@
       sudo apt-get install -y npmGit Graph
   fi
 
-  node -v && npm i -g rivalz-node-cli@latest && rivalz run
-  pm2 start "rivalz run" --name rivalz && \
+  node -v && npm i -g rivalz-node-cli@latest && rivalz update-version && \
+    rivalz run && pm2 start "rivalz run" --name rivalz && \
     pm2 startup && pm2 save && pm2 list
   echo "rivalz安装成功..."
 }
