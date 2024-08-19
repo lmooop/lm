@@ -3,6 +3,14 @@ node:
     remark: 需要GPU
     url: https://raw.githubusercontent.com/lmooop/lm/main/lilypad.sh
 
+  - name: flock
+    remark: 4C16G100G
+    url: https://raw.githubusercontent.com/lmooop/lm/main/flock.sh
+
+  - name: kuzco
+    remark: GPU
+    url: https://raw.githubusercontent.com/lmooop/lm/main/kuzco.sh
+
   - name: networks3
     remark: 配置要求低
     url: https://raw.githubusercontent.com/lmooop/lm/main/network3.sh
@@ -18,14 +26,6 @@ node:
   - name: rivalz
     remark: 磁盘分配多分多
     url: https://raw.githubusercontent.com/lmooop/lm/main/rivalz.sh
-
-  - name: flock
-    remark: 4C16G100G
-    url: https://raw.githubusercontent.com/lmooop/lm/main/flock.sh
-
-  - name: flock
-    remark: GPU
-    url: https://raw.githubusercontent.com/lmooop/lm/main/kuzco.sh
 
 miner:
   - name: ore_pool
