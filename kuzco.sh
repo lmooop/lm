@@ -2,8 +2,10 @@
 安装节点(){
   curl -fsSL https://kuzco.xyz/install.sh | sh 
   read -p $'输入节点--code: \n' code
+  read -p $' 多开数量: \n' work
   wget -O ~/kuzco.py https://raw.githubusercontent.com/lmooop/lm/main/kuzco.py
 	sed -i 's#code=""#code="'$code'"#' ~/kuzco.py
+	sed -i "s#workers = 3#workers = ${work}#" ~/kuzco.py
 	screen -dmS kuzco bash -c 'python3 ~/kuzco.py'
 }
 

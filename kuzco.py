@@ -9,7 +9,7 @@ import random
 import string
 
 # 根据自己的设备设置worker数量
-workers = 12
+workers = 3
 # 检测时间间隔，单位：秒
 check_interval = 600
 # 粘贴code
