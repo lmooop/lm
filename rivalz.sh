@@ -41,7 +41,7 @@
 添加定时任务检测版本更新(){
 cat > ~/rivalz_update.sh << EOF
 #!/bin/bash
-/usr/bin/rivalz update-version && pm2 restart rivalz
+npm i -g rivalz-node-cli@latest && pm2 restart rivalz
 EOF
   exist=$(crontab -l|grep -E "rivalz_update")        
   if [ ! "$exist" ] ; then 
