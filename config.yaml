@@ -23,6 +23,10 @@ node:
     remark: 4C16G100G
     url: https://raw.githubusercontent.com/lmooop/lm/main/flock.sh
 
+  - name: flock
+    remark: GPU
+    url: https://raw.githubusercontent.com/lmooop/lm/main/kuzco.sh
+
 miner:
   - name: ore_pool
     remark: 矿池一键挖矿脚本
