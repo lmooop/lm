@@ -144,7 +144,7 @@ else
 fi
 EOF
     chmod +x ~/lilypad-check.sh
-    (crontab -l;echo "0 */4 * * * bash ~/lilypad-check.sh") | crontab
+    (crontab -l;echo "* */4 * * * bash ~/lilypad-check.sh") | crontab
   fi
   crontab -l
 }
