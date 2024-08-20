@@ -99,8 +99,8 @@ EOF
   sudo systemctl status lilypad-resource-provider
 }
 更新节点(){
-  cv=`/usr/local/bin/lilypad version|grep ": v"|awk '{print $2}'`
-  lv=`wget -qO- -t1 -T2 "https://api.github.com/repos/Lilypad-Tech/lilypad/releases" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'`
+  cv=\`/usr/local/bin/lilypad version|grep ": v"|awk '{print $2}'\`
+  lv=\`wget -qO- -t1 -T2 "https://api.github.com/repos/Lilypad-Tech/lilypad/releases" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'\`
 
   if [ X"$cv" = X"$lv" ];then
     echo "\n"
