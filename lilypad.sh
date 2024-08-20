@@ -125,8 +125,6 @@ EOF
 }
 
 添加定时任务检测版本更新(){
-  exist=$(crontab -l|grep -E "lilypad-check")        
-  if [ ! "$exist" ] ; then 
 cat > ~/lilypad-check.sh << EOF
 #!/bin/bash
 cv=\`/usr/local/bin/lilypad version|grep ": v"|awk '{print $2}'\`
@@ -143,6 +141,8 @@ else
     sudo systemctl status lilypad-resource-provider
 fi
 EOF
+  exist=$(crontab -l|grep -E "lilypad-check")        
+  if [ ! "$exist" ] ; then 
     chmod +x ~/lilypad-check.sh
     (crontab -l;echo "* */4 * * * bash ~/lilypad-check.sh") | crontab
   fi
