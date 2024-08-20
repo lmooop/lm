@@ -99,7 +99,7 @@ EOF
   sudo systemctl status lilypad-resource-provider
 }
 更新节点(){
-  cv=/usr/local/bin/lilypad version|grep ": v"|awk '{print $2}'
+  cv=`/usr/local/bin/lilypad version|grep ": v"|awk '{print $2}'`
   lv=`wget -qO- -t1 -T2 "https://api.github.com/repos/Lilypad-Tech/lilypad/releases" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'`
 
   if [ X"$cv" = X"$lv" ];then
@@ -128,19 +128,19 @@ EOF
   if [ ! "$exist" ] ; then 
 cat > ~/lilypad-check.sh << EOF
 #!/bin/bash
-  cv=/usr/local/bin/lilypad version|grep ": v"|awk '{print $2}'
-  lv=`wget -qO- -t1 -T2 "https://api.github.com/repos/Lilypad-Tech/lilypad/releases" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'`
+cv=`/usr/local/bin/lilypad version|grep ": v"|awk '{print $2}'`
+lv=`wget -qO- -t1 -T2 "https://api.github.com/repos/Lilypad-Tech/lilypad/releases" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'`
 
-  if [ X"$cv" = X"$lv" ];then
-    echo "已是最新版本"
-  else
-    wget -O lilypad https://github.com/Lilypad-Tech/lilypad/releases/download/v2.2.8/lilypad-linux-amd64-gpu && \
-      chmod +x lilypad && \ 
-      sudo systemctl stop lilypad-resource-provider && \
-      sudo mv lilypad /usr/local/bin/lilypad && \
-      sudo systemctl restart lilypad-resource-provider && \
-      sudo systemctl status lilypad-resource-provider
-  fi
+if [ X"$cv" = X"$lv" ];then
+  echo "已是最新版本"
+else
+  wget -O lilypad https://github.com/Lilypad-Tech/lilypad/releases/download/v2.2.8/lilypad-linux-amd64-gpu && \
+    chmod +x lilypad && \ 
+    sudo systemctl stop lilypad-resource-provider && \
+    sudo mv lilypad /usr/local/bin/lilypad && \
+    sudo systemctl restart lilypad-resource-provider && \
+    sudo systemctl status lilypad-resource-provider
+fi
 EOF
     chmod +x ~/lilypad-check.sh
     (crontab -l;echo "0 */4 * * * bash ~/lilypad-check.sh") | crontab
