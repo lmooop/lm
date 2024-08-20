@@ -6,7 +6,7 @@ lilypad_i(){
   #OSNAME=$(uname -s | awk '{if ($1 == "Darwin") print "darwin"; else if ($1 == "Linux") print "linux"; else print "unsupported_os"}') && export OSNAME;
   # 下载最新发布版本的二进制
   # curl https://api.github.com/repos/lilypad-tech/lilypad/releases/latest | grep "browser_download_url.*lilypad-$OSNAME-$OSARCH" | cut -d : -f 2,3 | tr -d \" | wget -qi - -O lilypad
-  wget -O lilypad https://github.com/Lilypad-Tech/lilypad/releases/download/v2.2.7/lilypad-linux-amd64-cpu
+  wget -O lilypad https://github.com/Lilypad-Tech/lilypad/releases/download/v2.2.8/lilypad-linux-amd64-cpu
   # 更改权限
   chmod +x lilypad
   # 移动到bin目录
@@ -97,8 +97,28 @@ EOF
   sudo systemctl start lilypad-resource-provider
   sudo systemctl status lilypad-resource-provider
 }
+更新节点(){
+  wget -O lilypad https://github.com/Lilypad-Tech/lilypad/releases/download/v2.2.8/lilypad-linux-amd64-cpu
+  # 更改权限
+  chmod +x lilypad
+  # 移动到bin目录
+  sudo mv lilypad /usr/local/bin/lilypad
+  sudo systemctl restart lilypad-resource-provider
+}
+
+查看lilypad日志(){
+ journalctl -u lilypad-resource-provider.service -f -ocat
+}
+
+
+查看lilypad状态(){
+    sudo systemctl status lilypad-resource-provider
+}
+
 options=(
 安装节点
+更新节点
+查看lilypad日志
 )
 
 logo()
