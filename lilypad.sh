@@ -119,6 +119,7 @@ options=(
 安装节点
 更新节点
 查看lilypad日志
+查看lilypad状态
 )
 
 logo()
