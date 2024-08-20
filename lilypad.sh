@@ -103,9 +103,10 @@ EOF
   lv=`wget -qO- -t1 -T2 "https://api.github.com/repos/Lilypad-Tech/lilypad/releases" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'`
 
   if [ X"$cv" = X"$lv" ];then
+    echo "\n"
     echo "已是最新版本"
   else
-    wget -O lilypad https://github.com/Lilypad-Tech/lilypad/releases/download/v2.2.8/lilypad-linux-amd64-gpu && \
+    wget -O lilypad https://github.com/Lilypad-Tech/lilypad/releases/download/${lv}/lilypad-linux-amd64-gpu && \
       chmod +x lilypad && \ 
       sudo systemctl stop lilypad-resource-provider && \
       sudo mv lilypad /usr/local/bin/lilypad && \
@@ -131,10 +132,10 @@ cat > ~/lilypad-check.sh << EOF
 cv=`/usr/local/bin/lilypad version|grep ": v"|awk '{print $2}'`
 lv=`wget -qO- -t1 -T2 "https://api.github.com/repos/Lilypad-Tech/lilypad/releases" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'`
 
-if [ X"$cv" = X"$lv" ];then
+if [ X"\$cv" = X"\$lv" ];then
   echo "已是最新版本"
 else
-  wget -O lilypad https://github.com/Lilypad-Tech/lilypad/releases/download/v2.2.8/lilypad-linux-amd64-gpu && \
+  wget -O lilypad https://github.com/Lilypad-Tech/lilypad/releases/download/\${lv}/lilypad-linux-amd64-gpu && \
     chmod +x lilypad && \ 
     sudo systemctl stop lilypad-resource-provider && \
     sudo mv lilypad /usr/local/bin/lilypad && \
