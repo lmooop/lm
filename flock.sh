@@ -112,8 +112,6 @@ function install_pm2() {
     pm2 delete flock-validator && rm -rf llm-loss-validator
 }
 
-
-
 安装Training节点(){
   install_conda
   ensure_conda_initialized
@@ -150,7 +148,21 @@ TASK_ID=${TASK_ID} FLOCK_API_KEY="${FLOCK_API_KEY}" HF_TOKEN="${HF_TOKEN}" CUDA_
 EOF
   chmod +x ./run_training.sh
   pm2 start run_training.sh --name "flock-training" && pm2 startup && pm2 save
-  pm2 logs flock-training-node
+  pm2 logs flock-training
+}
+
+添加定时任务检测版本更新(){
+cat > ~/flock-check.sh << EOF
+#!/bin/bash
+cd ~/llm-loss-validator && git pull && pm2 restart flock-validator
+cd ~/testnet-training-node-quickstart && git pull && pm2 restart flock-training
+EOF
+  exist=$(crontab -l|grep -E "flock-check")        
+  if [ ! "$exist" ] ; then 
+    chmod +x ~/flock-check.sh
+    (crontab -l;echo "* */4 * * * bash ~/flock-check.sh") | crontab
+  fi
+  crontab -l
 }
 
 options=(
