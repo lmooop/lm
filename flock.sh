@@ -124,6 +124,7 @@ function install_pm2() {
   git clone https://github.com/FLock-io/testnet-training-node-quickstart.git
   cd testnet-training-node-quickstart
   conda create -n training-node python==3.10
+  # source "$MINICONDA_PATH/bin/activate" training-node
   conda activate training-node
   pip install -r requirements.txt
   read -p $'Hugging Face API: \n' HF_TOKEN
@@ -143,12 +144,13 @@ function install_pm2() {
    # 创建启动脚本
 cat << EOF > run_training.sh
 #!/bin/bash
-conda activate training-node
+source "$MINICONDA_PATH/bin/activate" training-node
 cd $SCRIPT_DIR/src
 TASK_ID=${TASK_ID} FLOCK_API_KEY="${FLOCK_API_KEY}" HF_TOKEN="${HF_TOKEN}" CUDA_VISIBLE_DEVICES=${genv} HF_USERNAME="${HF_USERNAME}" python full_automation.py
 EOF
   chmod +x ./run_training.sh
   pm2 start run_training.sh --name "flock-training" && pm2 startup && pm2 save
+  pm2 logs flock-training-node
 }
 
 options=(
