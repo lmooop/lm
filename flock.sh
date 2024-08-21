@@ -114,10 +114,47 @@ function install_pm2() {
 
 
 
+安装Training节点(){
+  install_conda
+  ensure_conda_initialized
+  install_nodejs_and_npm
+  install_pm2
+  apt update && apt upgrade -y
+  apt install curl sudo python3-venv iptables build-essential wget jq make gcc nano npm -y
+  git clone https://github.com/FLock-io/testnet-training-node-quickstart.git
+  cd testnet-training-node-quickstart
+  conda create -n training-node python==3.10
+  conda activate training-node
+  pip install -r requirements.txt
+  read -p $'Hugging Face API: \n' HF_TOKEN
+  read -p $'Flock APi: \n' FLOCK_API_KEY
+  read -p $'Task ID: \n' TASK_ID
+  read -p $'Hugging用户吗: \n' HF_USERNAME
+  read -p $'GPU 数量: \n' G_num
+  # 克隆仓库
+  # 获取当前目录的绝对路径
+  SCRIPT_DIR="$(pwd)"
+  genv=0
+  for ((i=1; i<${G_num}; i ++))
+  do
+    genv=${genv},$i
+  done
+
+   # 创建启动脚本
+cat << EOF > run_training.sh
+#!/bin/bash
+conda activate training-node
+cd \$SCRIPT_DIR/src
+TASK_ID=\${TASK_ID} FLOCK_API_KEY="\${FLOCK_API_KEY}" HF_TOKEN="\${HF_TOKEN}" CUDA_VISIBLE_DEVICES=\${genv} HF_USERNAME="\${HF_USERNAME}" python full_automation.py
+EOF
+  chmod +x ./run_training.sh
+  pm2 start run_training.sh --name "flock-training" && pm2 startup && pm2 save
+}
 
 options=(
 安装验证节点
 卸载验证节点
+安装Training节点
 )
 
 logo()
