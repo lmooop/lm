@@ -133,6 +133,7 @@ lv=\`wget -qO- -t1 -T2 "https://api.github.com/repos/Lilypad-Tech/lilypad/releas
 if [ X"\$cv" = X"\$lv" ];then
   echo "已是最新版本"
 else
+  cd ~
   wget -O lilypad https://github.com/Lilypad-Tech/lilypad/releases/download/\${lv}/lilypad-linux-amd64-gpu && \
     chmod +x lilypad && \ 
     sudo systemctl stop lilypad-resource-provider && \
