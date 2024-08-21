@@ -144,8 +144,8 @@ function install_pm2() {
 cat << EOF > run_training.sh
 #!/bin/bash
 conda activate training-node
-cd \$SCRIPT_DIR/src
-TASK_ID=\${TASK_ID} FLOCK_API_KEY="\${FLOCK_API_KEY}" HF_TOKEN="\${HF_TOKEN}" CUDA_VISIBLE_DEVICES=\${genv} HF_USERNAME="\${HF_USERNAME}" python full_automation.py
+cd $SCRIPT_DIR/src
+TASK_ID=${TASK_ID} FLOCK_API_KEY="${FLOCK_API_KEY}" HF_TOKEN="${HF_TOKEN}" CUDA_VISIBLE_DEVICES=${genv} HF_USERNAME="${HF_USERNAME}" python full_automation.py
 EOF
   chmod +x ./run_training.sh
   pm2 start run_training.sh --name "flock-training" && pm2 startup && pm2 save
