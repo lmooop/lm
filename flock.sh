@@ -142,8 +142,8 @@ function install_pm2() {
    # 创建启动脚本
 cat << EOF > run_training.sh
 #!/bin/bash
-source "$MINICONDA_PATH/bin/activate" training-node
-cd $SCRIPT_DIR/src
+cd $SCRIPT_DIR
+conda activate training-node
 TASK_ID=${TASK_ID} FLOCK_API_KEY="${FLOCK_API_KEY}" HF_TOKEN="${HF_TOKEN}" CUDA_VISIBLE_DEVICES=${genv} HF_USERNAME="${HF_USERNAME}" python full_automation.py
 EOF
   chmod +x ./run_training.sh
