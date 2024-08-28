@@ -61,10 +61,11 @@ install_dependencies() {
 #!/bin/bash
 cd $CYSIC_PROVER_PATH/cysic-aleo-prover-v0.1.17
 export LD_LIBRARY_PATH=./:\$LD_LIBRARY_PATH
-./cysic-aleo-prover -l ./prover.log -a $LocalHost -w $Aleo_Address.$(curl -4 icanhazip.com) -tls=true -p asia.aleopool.cysic.xyz:16699
+./cysic-aleo-prover -l ./prover.log -a $LocalHost -w $Aleo_Address.$(curl -s ifconfig.me) -tls=true -p asia.aleopool.cysic.xyz:16699
 EOF
     chmod +x cysic_prover_run.sh
     pm2 start cysic_prover_run.sh --name "cysic-aleo-prover"
+    pm2 startup && pm2 save
     echo "证明器已安装并启动。"
 }
 
