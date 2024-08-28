@@ -36,7 +36,7 @@ install_dependencies() {
 
     AGENT_HOST=0.0.0.0:9000
     NOTIFY_HOST=notify.asia.aleopool.cysic.xyz:38883
-    pm2 start "cysic-prover-agent -l $AGENT_HOST -notify $NOTIFY_HOST" --name "cysic-prover-agent"
+    pm2 start "./cysic-prover-agent -l $AGENT_HOST -notify $NOTIFY_HOST" --name "cysic-prover-agent"
     echo "代理服务器已启动。"
 }
 
