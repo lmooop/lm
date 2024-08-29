@@ -12,8 +12,8 @@
   read -p $'请按教程在网页认证后，输入你的block-start:\n' h
 
   echo $h > ~/nillion/accuser/block-start
-  #nohup sleep 2400 && docker run --restart=always -d --name nillion_verifier -v ./nillion/accuser:/var/tmp nillion/retailtoken-accuser:v1.0.0 accuse --rpc-endpoint "https://testnet-nillion-rpc.lavenderfive.com" --block-start ${h} 2>&1 > /dev/null &
-  echo "请等待 30-60 后启动节点"
+  docker run --restart=always -d --name nillion_verifier -v ./nillion/accuser:/var/tmp nillion/retailtoken-accuser:v1.0.0 accuse --rpc-endpoint "https://testnet-nillion-rpc.lavenderfive.com" --block-start
+  echo "请等待 30-60 分钟后检查节点日志"
 }
 
 更新rpc(){
@@ -24,9 +24,19 @@
   docker run --restart=always -d --name nillion_verifier -v ./nillion/accuser:/var/tmp nillion/retailtoken-accuser:v1.0.0 accuse --rpc-endpoint "$rpc" --block-start ${h}
 }
 
+查看日志(){
+  docker logs nillion_verifier --tail 100
+}
+重启nillion验证者(){
+  block_start=`cat ~/nillion/accuser/block-start`
+  docker run --restart=always -d --name nillion_verifier -v ./nillion/accuser:/var/tmp nillion/retailtoken-accuser:v1.0.0 accuse --rpc-endpoint "https://testnet-nillion-rpc.lavenderfive.com" --block-start ${block_start}
+  docker logs nillion_verifier --tail 100
+}
 options=(
 安装nillion验证者
+重启nillion验证者
 更新rpc
+查看日志
 )
 
 logo()
