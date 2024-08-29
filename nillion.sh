@@ -4,14 +4,14 @@
   docker pull nillion/retailtoken-accuser:v1.0.0
   cd
   mkdir -p nillion/accuser
-  docker run -v --rm ./nillion/accuser:/var/tmp nillion/retailtoken-accuser:v1.0.0 initialise
+  docker run --rm -v ./nillion/accuser:/var/tmp nillion/retailtoken-accuser:v1.0.0 initialise
   echo "你的AccountID\n"
-  cat /root/nillion/accuser/credentials.json|jq -r .address
+  cat ~/nillion/accuser/credentials.json|jq -r .address
   echo "你的PublicKey\n"
-  cat /root/nillion/accuser/credentials.json|jq -r .pub_key
+  cat ~/nillion/accuser/credentials.json|jq -r .pub_key
   read -p $'请按教程在网页认证后，输入你的block-start: \n' h
   echo $h > ~/nillion/accuser/block-start
-  docker run --restart=always -d --name nillion_verifier -v ./nillion/accuser:/var/tmp nillion/retailtoken-accuser:v1.0.0 accuse --rpc-endpoint "https://testnet-nillion-rpc.lavenderfive.com" --block-start ${h}
+  nohup sleep 2400 && docker run --restart=always -d --name nillion_verifier -v ./nillion/accuser:/var/tmp nillion/retailtoken-accuser:v1.0.0 accuse --rpc-endpoint "https://testnet-nillion-rpc.lavenderfive.com" --block-start ${h} 2>&1 > /dev/null &
   echo "请等待 30-60 分钟再看查看节点日志"
 }
 
