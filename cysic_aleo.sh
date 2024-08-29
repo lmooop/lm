@@ -46,11 +46,11 @@ install_dependencies() {
     rm -rf $CYSIC_PROVER_PATH
     mkdir -p $CYSIC_PROVER_PATH
     cd $CYSIC_PROVER_PATH
-
+    version=v0.1.18
     # 下载证明器
-    wget https://github.com/cysic-labs/aleo-miner/releases/download/v0.1.17/cysic-aleo-prover-v0.1.17.tgz
-    tar -xf cysic-aleo-prover-v0.1.17.tgz 
-    cd cysic-aleo-prover-v0.1.17
+    wget https://github.com/cysic-labs/aleo-miner/releases/download/${version}/cysic-aleo-prover-${version}.tgz
+    tar -xf cysic-aleo-prover-${version}.tgz 
+    cd cysic-aleo-prover-${version}
 
     LocalHost=`hostname -I|awk '{print $1}'`
     # 获取用户的奖励领取地址
@@ -59,7 +59,7 @@ install_dependencies() {
     # 创建启动脚本
     cat <<EOF > cysic_prover_run.sh
 #!/bin/bash
-cd $CYSIC_PROVER_PATH/cysic-aleo-prover-v0.1.17
+cd $CYSIC_PROVER_PATH/cysic-aleo-prover-${version}
 export LD_LIBRARY_PATH=./:\$LD_LIBRARY_PATH
 ./cysic-aleo-prover -l ./prover.log -a $LocalHost -w $Aleo_Address.$(curl -s ifconfig.me) -tls=true -p asia.aleopool.cysic.xyz:16699
 EOF
