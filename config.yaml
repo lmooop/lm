@@ -1,4 +1,8 @@
 node:
+  - name: nillion
+    remark: 需要GPU
+    url: https://raw.githubusercontent.com/lmooop/lm/main/nillion.sh
+
   - name: cysic-aleo
     remark: 需要GPU
     url: https://raw.githubusercontent.com/lmooop/lm/main/cysic_aleo.sh
