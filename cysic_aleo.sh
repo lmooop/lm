@@ -52,16 +52,17 @@ install_dependencies() {
     tar -xf cysic-aleo-prover-${version}.tgz 
     cd cysic-aleo-prover-${version}
 
-    LocalHost=`hostname -I|awk '{print $1}'`
+    # LocalHost=`hostname -I|awk '{print $1}'`
     # 获取用户的奖励领取地址
     read -p $'(Aleo 地址钱包地址,可在 https://www.provable.tools/account 生成:\n' Aleo_Address
+    read -p $'(代理节点 ip，eg: 192.168.1.152:9000\n' Proxy_Address
 
     # 创建启动脚本
     cat <<EOF > cysic_prover_run.sh
 #!/bin/bash
 cd $CYSIC_PROVER_PATH/cysic-aleo-prover-${version}
 export LD_LIBRARY_PATH=./:\$LD_LIBRARY_PATH
-./cysic-aleo-prover -l ./prover.log -a $LocalHost -w $Aleo_Address.$(curl -s ifconfig.me) -tls=true -p asia.aleopool.cysic.xyz:16699
+./cysic-aleo-prover -l ./prover.log -a $Proxy_Address -w $Aleo_Address.$(curl -s ifconfig.me) -tls=true -p asia.aleopool.cysic.xyz:16699
 EOF
     chmod +x cysic_prover_run.sh
     pm2 start cysic_prover_run.sh --name "cysic-aleo-prover"
